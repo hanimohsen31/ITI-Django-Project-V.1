@@ -14,22 +14,19 @@ class Funding(models.Model):
     category = models.CharField(max_length=20, choices=Category)
     details = models.TextField(default='')
     target = models.IntegerField(default=0)
-    start = models.DateTimeField(null=True)
-    end = models.DateTimeField(null=True)
+    # start = models.DateTimeField(null=True)
+    # end = models.DateTimeField(null=True)
     image = models.ImageField(upload_to='fundings/')
-    # check on_delete condition
-    # creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    # creator = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    # still need rate check
-    # rate = models.Count()
-    # funding_comment = models.ForeignKey('Comment', on_delete=models.CASCADE)
+    current_donation = models.IntegerField(default=0)
+    commentinitial = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
 
-#
-# class Comment(models.Model):
-#     comment = models.CharField(max_length=200)
-#
-#     def __str__(self):
-#         return self.comment
+
+class Comment(models.Model):
+    connect = models.ForeignKey(Funding, on_delete=models.CASCADE)
+    content = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.comment

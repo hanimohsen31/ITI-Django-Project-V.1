@@ -1,0 +1,48 @@
+{% extends './base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block body %}
+
+    <style>
+        .form-group{
+            display: flex;
+            flex-direction: column;
+         }
+    </style>
+
+
+    <!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Add Funding</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+    <div class="job_details_area">
+        <div class="container">
+            <div class="row">
+                    <div class="apply_job_form white-bg col-sm-12">
+                        <h4>Apply for the job</h4>
+<!--                        start form                                      -->
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            {% buttons %}
+                                <button class="boxed-btn3 w-100" type="submit">Add Funding</button>
+                            {% endbuttons %}
+                        </form>
+<!--                        end fooooooooooooooooooooooooooooooooooooorm                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

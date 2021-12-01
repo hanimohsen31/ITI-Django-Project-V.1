@@ -2,8 +2,17 @@
 {% load static %}
 {% load bootstrap4 %}
 
-{% block body %}
 
+
+{% block body %}
+    <style>
+        label{
+            width:100%
+            }
+        .nice-select{
+        margin-bottom: 10px;
+        }
+    </style>
     <!-- bradcam_area  -->
     <div class="bradcam_area bradcam_bg_1">
         <div class="container">
@@ -32,9 +41,6 @@
                                     <a href="#"><h4>{{funding_detail.title}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
                                         <div class="location">
-                                            <p> <i class="fa fa-map-marker"></i> California, USA</p>
-                                        </div>
-                                        <div class="location">
                                             <p> <i class="fa fa-clock-o"></i>{{funding_detail.category}}</p>
                                         </div>
                                     </div>
@@ -42,6 +48,12 @@
                             </div>
                             <div class="jobs_right">
                                 <div class="apply_now">
+                                    <style>
+                                    .reporthim{background: #EFFDF5;border-radius: 5px;border:0}
+                                    .reporthim:hover{background: #00D363;color: #fff;}
+                                    </style>
+<!--                                        -->
+                                    <a class="btn btn-outline-success reporthim " href="#" style=""> Report </a>
                                     <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
                                 </div>
                             </div>
@@ -49,28 +61,47 @@
                     </div>
                     <div class="descript_wrap white-bg">
                         <div class="single_wrap">
-                            <h4>Job description</h4>
-                            <p>{{funding_detail.description}}</p>
+                            <h4>Funding Details</h4>
+                            <p>{{funding_detail.details}}</p>
+                            <p>Start at: <span>{{funding_detail.start|date:'d M o'}}</span></p>
+                            <p>End at: <span>{{funding_detail.end|date:'d M o'}}</span></p>
+                            <p>Category: <span>{{funding_detail.category}}</span></p>
+                            <a class="btn btn-outline-success reporthim " href="#" style="margin:10px auto">Donate</a>
+
+                            <hr>
+                        <!-- Start Comments Section -->
+                            <div class="comment-conainer">
+                            <h4>Comments</h4>
+                            <input type="text" placeholder="Comment" id="amount"
+                                   class="w-100"
+                                   style="border:1px solid #7a838b38; color:#7A838B; font-size: 14px; font-weight:400;padding:10px;border-radius: 3px;">
+                            <a class="btn btn-outline-success reporthim " href="#" style="margin:10px auto"> Add Comment </a>
+                            </div>
+
+                            <p style="border: 1px solid #7a838b38;border-radius: 3px;color: #7A838B;font-size: 14px;font-weight: 400;padding: 5px;">
+                                dddddddddd
+                            </p>
+                            <a class="btn btn-outline-success reporthim " href="#" style="margin:10px auto">Report</a>
+
+                        <!-- End Comments Section -->
+                            <hr>
+
                         </div>
-
-                    </div>
-                    <div class="apply_job_form white-bg">
-                        <h4>Apply for the job</h4>
-
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="job_sumary">
                         <div class="summery_header">
-                            <h3>Job Summery</h3>
+                            <h3>Funding Summery</h3>
                         </div>
                         <div class="job_content">
                             <ul>
-                                <li>Published on: <span>{{funding_detail.published_at|date:'d M o'}}</span></li>
-                                <li>Vacancy: <span>{{funding_detail.vacancy}}</span></li>
-                                <li>Salary: <span>{{funding_detail.salary}}</span></li>
-                                <li>Location: <span>California, USA</span></li>
-                                <li>Job Nature: <span>{{funding_detail.job_type}}</span></li>
+                                <li>Start at: <span>{{funding_detail.start|date:'d M o'}}</span></li>
+                                <li>End at: <span>{{funding_detail.end|date:'d M o'}}</span></li>
+                                <li>Category: <span>{{funding_detail.category}}</span></li>
+                                <li>Target: <span>{{funding_detail.target}} LE</span></li>
+<!--                                <li>Location: <span>California, USA</span></li>-->
+<!--                                <li>Job Nature: <span>{{funding_detail.job_type}}</span></li>-->
                             </ul>
                         </div>
                     </div>
@@ -82,35 +113,6 @@
                             <li><a href="#"> <i class="fa fa-twitter"></i></a> </li>
                             <li><a href="#"> <i class="fa fa-envelope"></i></a> </li>
                         </ul>
-                    </div>
-                    <div class="job_location_wrap">
-                        <div class="job_lok_inner">
-                            <div id="map" style="height: 200px;"></div>
-                            <script>
-                              function initMap() {
-                                var uluru = {lat: -25.363, lng: 131.044};
-                                var grayStyles = [
-                                  {
-                                    featureType: "all",
-                                    stylers: [
-                                      { saturation: -90 },
-                                      { lightness: 50 }
-                                    ]
-                                  },
-                                  {elementType: 'labels.text.fill', stylers: [{color: '#ccdee9'}]}
-                                ];
-                                var map = new google.maps.Map(document.getElementById('map'), {
-                                  center: {lat: -31.197, lng: 150.744},
-                                  zoom: 9,
-                                  styles: grayStyles,
-                                  scrollwheel:  false
-                                });
-                              }
-                              
-                            </script>
-                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap"></script>
-                            
-                          </div>
                     </div>
                 </div>
             </div>

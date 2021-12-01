@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="bradcam_text">
-                    <h3>{{funding_list.count}}+ Fundings Available</h3>
+                    <h3>{{listlength.count}}+ Fundings Available</h3>
                 </div>
             </div>
         </div>
@@ -47,7 +47,6 @@
                                 <div class="col-lg-12">
                                     <div class="single_field">
                                             <input type="text" placeholder="Target" id="amount" style="border:1; color:7A838B; font-size: 14px; font-weight:400;">
-
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +79,7 @@
                                         <a href="{% url 'funding:funding_details' i.id %}"><h4>{{i.title}}</h4></a>
                                         <div class="links_locat d-flex align-items-center">
                                             <div class="location">
-                                                <p> <i class="fa fa-map-marker"></i>{{i.details}}</p>
+                                                <p> <i class="fa fa-usd"></i>{{i.target}} LE</p>
                                             </div>
                                             <div class="location">
                                                 <p> <i class="fa fa-clock-o"></i>{{i.category}}</p>
@@ -117,7 +116,7 @@
                                     {% endfor %}
 
                                     {% if funding_list.has_next %}
-                                        <li><a href=""> <i class="ti-angle-right"></i> </a></li>
+                                        <li><a href="?page={{ funding_list.next_page_number }}"> <i class="ti-angle-right"></i> </a></li>
                                     {% endif %}
                                 </ul>
                             </div>
