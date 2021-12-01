@@ -16,7 +16,7 @@ class Funding(models.Model):
     target = models.IntegerField(default=0)
     start = models.DateTimeField(null=True)
     end = models.DateTimeField(null=True)
-    # pictures = models.FileField(upload_to='../src/uploads')
+    image = models.ImageField(upload_to='fundings/')
     # check on_delete condition
     # creator = models.ForeignKey(User, on_delete=models.CASCADE)
     # creator = models.ForeignKey(User, on_delete=models.DO_NOTHING)
