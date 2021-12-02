@@ -28,7 +28,7 @@ Activates the Python virtual environment that contains the Activate.ps1 script,
 and shows extra information about the activation as it executes.
 
 .Example
-Activate.ps1 -VenvDir C:\Users\MyUser\Common\.venv
+Activate.ps1 -VenvDir C:\User\MyUser\Common\.venv
 Activates the Python virtual environment located in the specified location.
 
 .Example

@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import User
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -9,24 +9,100 @@ Category = (
 )
 
 
+# fund ==> app
+# project ==> project
 class Funding(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=20)
     category = models.CharField(max_length=20, choices=Category)
     details = models.TextField(default='')
     target = models.IntegerField(default=0)
-    # start = models.DateTimeField(null=True)
-    # end = models.DateTimeField(null=True)
+    start = models.DateField(auto_now=True)
+    end = models.DateField(auto_now=False, auto_now_add=False)
     image = models.ImageField(upload_to='fundings/')
     current_donation = models.IntegerField(default=0)
-    commentinitial = models.CharField(max_length=100)
+    rating = models.FloatField(null=True, default=0)
 
     def __str__(self):
         return self.title
 
 
-class Comment(models.Model):
-    connect = models.ForeignKey(Funding, on_delete=models.CASCADE)
-    content = models.CharField(max_length=100)
+# Donations
+class Project_donations(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    project = models.ForeignKey(Funding, null=True, on_delete=models.CASCADE)
+    donation = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+# Rating
+class Project_rating(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    project = models.ForeignKey(Funding, null=True, on_delete=models.CASCADE)
+    rating = models.FloatField()
+
+
+# comments
+class Project_comments(models.Model):
+    user = models.ForeignKey(User, null=True,on_delete=models.CASCADE)
+    project = models.ForeignKey(Funding, null=True, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.comment
+
+
+# Reports
+class Reports(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    project = models.ForeignKey(Funding, null=True, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Project_comments, null=True, on_delete=models.CASCADE)
+    report = models.TextField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.report
+
+
+# Multiple images
+def get_image_name(instance, filename):
+    title = instance.project.title
+    slug = slugify(title)
+    return "projects/images/%s-%s" % (slug, filename)
+
+
+@property
+def images(self):
+    return Project_pics.objects.filter(project_id=self.id)
+
+
+class Project_pics(models.Model):
+    project = models.ForeignKey('Funding', null=True, on_delete=models.CASCADE)
+    pic = models.ImageField(upload_to=get_image_name, verbose_name='Project Image')
+
+    def __str__(self):
+        return str(self.pic)
+
+
+# Multiple Tags
+class Tags(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+class Project_tags(models.Model):
+    project = models.ForeignKey('Funding', null=True, on_delete=models.CASCADE)
+    tag = models.ForeignKey('Tags', null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Project Tag"
+        verbose_name_plural = "Project Tags"
+        # project here to the project in same class
+        unique_together = ('tag', 'project')
+

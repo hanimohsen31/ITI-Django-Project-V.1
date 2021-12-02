@@ -43,7 +43,7 @@ def funding_details(request, id):
         form = FundingForm()
     context = {'funding_detail': funding_detail, 'form': form}
     return render(request, 'funding/funding_details.html', context)
-
+    pass
 
 def addfunding(request):
     if request.method == 'POST':
@@ -55,6 +55,7 @@ def addfunding(request):
     else:
         form = FundingForm()
     return render(request, 'funding/funding_add.html', {'form': form})
+    pass
 
 
 # def addcomment(request):
