@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/tagsinput.css' %}" />
 </head>
 
 <body>
@@ -226,6 +228,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
         } );
         </script>
+        <script src="{% static 'js/tagsinput.js' %}"></script>
 </body>
 
 </html>
