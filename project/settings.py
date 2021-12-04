@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'user',
     "bootstrap4",
     'taggit',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [

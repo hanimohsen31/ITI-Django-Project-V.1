@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.template.defaultfilters import slugify
 
-# Create your models here.
 
+# Create your models here.
 class Category (models.Model):
-    cat_name=models.CharField(max_length=25)
+    cat_name = models.CharField(max_length=25)
 
     def __str__(self):
         return self.cat_name   

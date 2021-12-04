@@ -9,11 +9,11 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.urls import reverse
-
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from .form import FundingForm,CommentForm
+from .form import FundingForm, CommentForm
 from taggit.models import Tag
+from .filters import FundingFilter
 
 # Create your views here.
 
@@ -21,18 +21,32 @@ from taggit.models import Tag
 def funding_list(request):
     funding_list = Funding.objects.all()
 
+    myfilter = FundingFilter(request.GET, queryset=funding_list)
+    funding_list = myfilter.qs
+
     paginator = Paginator(funding_list, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    context = {'funding_list': page_obj, 'listlength': funding_list}
+    context = {'funding_list': page_obj, 'listlength': funding_list ,'myfilter':myfilter}
     return render(request, 'funding/funding_list.html', context)
 
-#
-# def funding_details(request, id):
-#     funding_details = Funding.objects.get(id=id)
-#     context = {'funding_details': funding_details}
-#     return render(request, 'funding/funding_details.html', context)
+
+def home(request):
+
+    top5 = Funding.objects.all().order_by('-rating')[0:5]
+    least5 = Funding.objects.all().order_by('rating')[0:5]
+    fundings5 = Funding.objects.all()[0:5]
+
+    funding_all = Funding.objects.all()
+
+
+    funding_list = Funding.objects.all()
+    myfilter = FundingFilter(request.GET, queryset=funding_list)
+    funding_list = myfilter.qs
+
+    context = {'top5': top5, 'least5': least5, 'fundings5': fundings5, 'myfilter': myfilter , 'funding_list':funding_list, 'funding_all':funding_all}
+    return render(request, 'funding/home.html', context)
 
 
 def funding_details(request, id):
@@ -82,13 +96,21 @@ def addfunding(request):
     pass
 
 
-# def addcomment(request):
-#     if request.method == 'POST':
-#         commentform = CommentForm(request.POST)
-#         if commentform.is_valid():
-#             commentform.save()
-#             return redirect(reverse('funding:home'))
-#         pass
-#     else:
-#         commentform = CommentForm()
-#     return render(request, 'funding/funding_details.html', {'commentform': commentform})
+# def filter_title(request, title):
+#     funding_list = Funding.objects.filter(title=title)
+#     paginator = Paginator(funding_list, 5)
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+#
+#     context = {'funding_list': page_obj, 'listlength': funding_list}
+#     return render(request, 'funding/filter_title.html', context)
+#
+#
+# def filter_category(request, category):
+#     funding_list = Funding.objects.filter(category=category)
+#     paginator = Paginator(funding_list, 5)
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+#
+#     context = {'funding_list': page_obj, 'listlength': funding_list}
+#     return render(request, 'funding/filter_title.html', context)
