@@ -1,0 +1,85 @@
+{% extends './base.html' %}
+{% load static %}
+{% block body %}
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="single_slider  d-flex align-items-center slider_bg_1" style="height: 300px;">
+            <div class="container">
+
+            </div>
+        </div>
+        <div class="ilstration_img wow fadeInRight d-none d-lg-block text-right" data-wow-duration="1s" data-wow-delay=".2s">
+            <img src="img/banner/illustration.png" alt="">
+        </div>
+    </div>
+    <!-- slider_area_end -->
+
+
+
+    <!-- featured_candidates_area_start  -->
+    <div class="featured_candidates_area">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title text-center m-4">
+                        <h3>Top 5 Rated</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="candidate_active owl-carousel">
+                        {% for i in funding_list %}
+                        <div class="single_candidates text-center">
+                            <div class="thumb">
+                                <img src="{{i.image.url}}" alt="" width="110px" height="110px">
+                            </div>
+                            <a href="#"><h4>{{i.title}}</h4></a>
+                            <p>Target: {{i.target}}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- featured_candidates_area_end  -->
+
+
+    <!-- featured_candidates_area_start  -->
+    <div class="featured_candidates_area">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title text-center m-4">
+                        <h3>Least 5 Rated</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="candidate_active owl-carousel">
+                        {% for i in funding_list %}
+                        <div class="single_candidates text-center">
+                            <div class="thumb">
+                                <img src="{{i.image.url}}" alt="" width="110px" height="110px">
+                            </div>
+                            <a href="#"><h4>{{i.title}}</h4></a>
+                            <p>Target: {{i.target}}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- featured_candidates_area_end  -->
+
+
+
+{% endblock body %}

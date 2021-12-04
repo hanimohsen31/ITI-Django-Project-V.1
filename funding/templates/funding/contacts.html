@@ -1,0 +1,69 @@
+{% extends './base.html' %}
+{% load static %}
+{% block body %}
+
+<style>
+    .single_candidates{
+
+    }
+
+</style>
+    <!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Contacts</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+
+    <!-- featured_candidates_area_start  -->
+    <div class="featured_candidates_area candidate_page_padding">
+        <div class="container">
+            <h3 class="text-center mb-5">Team Developed This App</h3>
+            <br>
+            <div class="row justify-content-around">
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="single_candidates text-center ">
+                        <div class="thumb">
+                            <img src="{% static 'contacts/fathi.jpg' %}" alt="">
+                        </div>
+                        <a href="https://www.linkedin.com/in/fathi-eldeabas-10b775204/"><h4>Fathi Eldeabas</h4></a>
+                        <p>Full Stack Developer</p>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="single_candidates text-center ">
+                        <div class="thumb">
+                            <img src="{% static 'contacts/hani.jpg' %}" alt="">
+                        </div>
+                        <a href="https://www.linkedin.com/in/haniomhsen3810/"><h4>Hani Mohsen</h4></a>
+                        <p>Full Stack Developer</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="single_candidates text-center ">
+                        <div class="thumb">
+                            <img src="{% static 'contacts/mohamed.jpg' %}" alt="">
+                        </div>
+                        <a href="https://www.linkedin.com/in/mohamed-ali-1a0058158/"><h4>Mohamed Ali</h4></a>
+                        <p>Full Stack Developer</p>
+                    </div>
+                </div>
+        </div>
+        </div>
+    </div>
+    <!-- featured_candidates_area_end  -->
+
+{% endblock body %}

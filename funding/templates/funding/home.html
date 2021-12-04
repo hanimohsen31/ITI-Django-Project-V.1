@@ -1,0 +1,164 @@
+{% extends './base.html' %}
+{% load static %}
+{% block body %}
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="single_slider  d-flex align-items-center slider_bg_1">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 col-md-6">
+                        <div class="slider_text">
+                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Find Fundings easily</h5>
+                            <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Django Funding App</h3>
+                            <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">We provide online instant funding with quick approval that suit your term length</p>
+<!--                            <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">-->
+<!--                                <a href="#" class="boxed-btn3">Upload your Resume</a>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ilstration_img wow fadeInRight d-none d-lg-block text-right" data-wow-duration="1s" data-wow-delay=".2s">
+            <img src="img/banner/illustration.png" alt="">
+        </div>
+    </div>
+    <!-- slider_area_end -->
+
+    <!-- catagory_area -->
+    <div class="catagory_area">
+        <div class="container">
+            <div class="row cat_search justify-content-center">
+                <div class="col-lg-9 col-md-12">
+                    <div class="single_input" style="display: flex;align-items: center;justify-content: space-evenly;">
+<!--                        <form action="#" method="get">-->
+<!--                            {{myfilter.form}}-->
+                            <input  class="col-8"placeholder="Search keyword" style="padding: 13px">
+                            <a href="{% url 'funding:list' %}" class="boxed-btn3 col-3">Find a Fund</a>
+<!--                        </form>-->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!--/ catagory_area -->
+
+    <!-- job_listing_area_start  -->
+    <div class="job_listing_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="section_title">
+                        <h3 class="mt-5">Fund Listing</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="job_lists">
+                <div class="row">
+                    {% for i in fundings5 %}
+                    <div class="col-lg-12 col-md-12">
+                        <div class="single_jobs white-bg d-flex justify-content-between">
+                            <div class="jobs_left d-flex align-items-center">
+                                <div class="thumb" style="padding: 0">
+                                    <img src="{{i.image.url}}" alt="" width="82px" height="82px" >
+                                </div>
+                                <div class="jobs_conetent">
+                                    <a href="job_details.html"><h4>{{i.title}}</h4></a>
+                                    <div class="links_locat d-flex align-items-center">
+                                        <div class="location">
+                                            <p> <i class="fa fa-map-marker"></i>{{i.target}}</p>
+                                        </div>
+                                        <div class="location">
+                                            <p> <i class="fa fa-clock-o"></i>{{i.category}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="jobs_right">
+                                <div class="apply_now">
+                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+                                    <a href="{% url 'funding:funding_details' i.id%}" class="boxed-btn3">View Funding</a>
+                                </div>
+                                <div class="date">
+                                    <p>Ends at: {{funding_detail.end|date:'d M o'}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- job_listing_area_end  -->
+
+    <!-- featured_candidates_area_start  -->
+    <div class="featured_candidates_area">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title text-center m-4">
+                        <h3>Top 5 Rated</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="candidate_active owl-carousel">
+                        {% for i in top5 %}
+                        <div class="single_candidates text-center">
+                            <div class="thumb">
+                                <img src="{{i.image.url}}" alt="" width="110px" height="110px">
+                            </div>
+                            <a href="{% url 'funding:funding_details' i.id %}"><h4>{{i.title}}</h4></a>
+                            <p>Rating: {{i.rating}}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- featured_candidates_area_end  -->
+
+
+    <!-- featured_candidates_area_start  -->
+    <div class="featured_candidates_area">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title text-center m-4">
+                        <h3>Least 5 Rated</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="candidate_active owl-carousel">
+                        {% for i in least5 %}
+                        <div class="single_candidates text-center">
+                            <div class="thumb">
+                                <img src="{{i.image.url}}" alt="" width="110px" height="110px">
+                            </div>
+                            <a href="{% url 'funding:funding_details' i.id %}"><h4>{{i.title}}</h4></a>
+                            <p>Rating: {{i.rating}}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- featured_candidates_area_end  -->
+
+
+
+{% endblock body%}

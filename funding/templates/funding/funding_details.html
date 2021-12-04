@@ -82,11 +82,27 @@
             <p><h4> Start at :</h4> <span>{{funding_detail.start|date:'d M o'}}</span></p>
             <p><h4> End at : </h4><span>{{funding_detail.end|date:'d M o'}}</span></p>
             <p><h4> Category :</h4> <span>{{funding_detail.category}}</span></p>
-            <a class="btn btn-outline-success reporthim" href="#" style="margin: 10px auto">Donate</a>
           </div>
         </div>
         <div class="descript_wrap white-bg">
           <div class="single_wrap">
+            <hr />
+            <!-- Start Comments Section -->
+            <h4>Donate To This Project Now ..!</h4>
+            <form action="" method="post">
+
+              {% csrf_token %}
+              {%bootstrap_form donateform %}
+              {% if message%}
+              <div class="alert alert-danger" role="alert">
+                {{message}}
+              </div>
+              {%endif%}
+              <p>
+                <input type="submit" value="Donate" class="btn btn-outline-success reporthim"
+                  style="margin: 10px auto" />
+              </p>
+            </form>
 
             <hr />
             <!-- Start Comments Section -->
@@ -204,7 +220,7 @@
               <li>End at: <span>{{funding_detail.end|date:'d M o'}}</span></li>
               <li>Category: <span>{{funding_detail.category}}</span></li>
               <li>Target: <span>{{funding_detail.target}} LE</span></li>
-              <li>Collected: <span>{{funding_detail.collected}} LE</span></li>
+              <li>Collected: <span>{{donations}} LE</span></li>
               <!--                                <li>Location: <span>California, USA</span></li>-->
               <!--                                <li>Job Nature: <span>{{funding_detail.job_type}}</span></li>-->
             </ul>

@@ -24,7 +24,7 @@ class CommentForm(forms.ModelForm):
         fields = ('comment',)
 
 
-class Donate(forms.ModelForm):
+class DonateForm(forms.ModelForm):
     donation = forms.IntegerField(min_value=1)
 
     class Meta:

@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.template.defaultfilters import slugify
 
-# Create your models here.
 
+# Create your models here.
 class Category (models.Model):
-    cat_name=models.CharField(max_length=25)
+    cat_name = models.CharField(max_length=25)
 
     def __str__(self):
         return self.cat_name   
@@ -24,7 +24,7 @@ class Funding(models.Model):
     start = models.DateField(auto_now=True)
     end = models.DateField(auto_now=False, auto_now_add=False)
     image = models.ImageField(upload_to='fundings/')
-
+    rating = models.FloatField(null=True, default=0)
    
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Funding(models.Model):
 class Project_donations(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     project = models.ForeignKey(Funding, null=True, on_delete=models.CASCADE)
-    donation = models.IntegerField()
+    donation = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
