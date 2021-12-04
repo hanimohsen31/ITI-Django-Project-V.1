@@ -24,8 +24,8 @@ class Funding(models.Model):
     start = models.DateField(auto_now=True)
     end = models.DateField(auto_now=False, auto_now_add=False)
     image = models.ImageField(upload_to='fundings/')
-    current_donation = models.IntegerField(default=0)
-    rating = models.FloatField(null=True, default=0)
+
+   
 
     def __str__(self):
         return self.title

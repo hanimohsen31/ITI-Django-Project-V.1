@@ -79,10 +79,9 @@
           <div class="single_wrap">
             <h4>Funding Details</h4>
             <p>{{funding_detail.details}}</p>
-            <p>{{funding_detail.id}}</p>
-            <p>Start at: <span>{{funding_detail.start|date:'d M o'}}</span></p>
-            <p>End at: <span>{{funding_detail.end|date:'d M o'}}</span></p>
-            <p>Category: <span>{{funding_detail.category}}</span></p>
+            <p><h4> Start at :</h4> <span>{{funding_detail.start|date:'d M o'}}</span></p>
+            <p><h4> End at : </h4><span>{{funding_detail.end|date:'d M o'}}</span></p>
+            <p><h4> Category :</h4> <span>{{funding_detail.category}}</span></p>
             <a class="btn btn-outline-success reporthim" href="#" style="margin: 10px auto">Donate</a>
           </div>
         </div>
@@ -205,6 +204,7 @@
               <li>End at: <span>{{funding_detail.end|date:'d M o'}}</span></li>
               <li>Category: <span>{{funding_detail.category}}</span></li>
               <li>Target: <span>{{funding_detail.target}} LE</span></li>
+              <li>Collected: <span>{{funding_detail.collected}} LE</span></li>
               <!--                                <li>Location: <span>California, USA</span></li>-->
               <!--                                <li>Job Nature: <span>{{funding_detail.job_type}}</span></li>-->
             </ul>
@@ -231,7 +231,7 @@
           <span>Tags:</span>
           <ul>
             {%for tag in funding_detail.project_tags.all%}
-            <li><a href="#">{{tag}}</a></li>
+            <li class="badge badge-primary text-wrap"><a href="#">{{tag}}</a></li>
             {%endfor%}
           </ul>
         </div>

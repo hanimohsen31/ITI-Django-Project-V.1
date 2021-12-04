@@ -1,15 +1,13 @@
 from django.db.models.query import QuerySet
-from django.forms.models import modelformset_factory
 from django.shortcuts import render
 from django.shortcuts import render
-from .models import Funding, Project_comments, Project_pics, images
+from .models import Funding, Project_comments, Project_pics
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.urls import reverse
-
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .form import FundingForm,CommentForm
@@ -28,27 +26,15 @@ def funding_list(request):
     context = {'funding_list': page_obj, 'listlength': funding_list}
     return render(request, 'funding/funding_list.html', context)
 
-#
-# def funding_details(request, id):
-#     funding_details = Funding.objects.get(id=id)
-#     context = {'funding_details': funding_details}
-#     return render(request, 'funding/funding_details.html', context)
+
 
 
 def funding_details(request, id):
     funding_detail = Funding.objects.get(id=id)
-    fund_form = FundingForm(request.POST or None, request.FILES, instance=funding_detail)
     comments=Project_comments.objects.filter(project_id=id)
     new_comment = None
     if request.method == 'POST':
-        if fund_form.is_valid():
-            myform = fund_form.save(commit=False)
-            myform.job = funding_detail
-            myform.save()
-            for file in request.FILES.getlist('images'):
-                Project_pics(project=fund_form.instance, pic=file).save()
-
-        # ########################To Add Comments##############################        
+        # ######################## To Add Comments ##############################        
         commentform = CommentForm(data=request.POST)
         if commentform.is_valid():  
             # Create Comment object but don't save to database yet          
@@ -62,7 +48,12 @@ def funding_details(request, id):
         commentform = CommentForm()
         
     imgs = Project_pics.objects.filter(project_id=id)
-    context = {'funding_detail': funding_detail, 'fund_form': fund_form, 'commentform': commentform,'new_comment':new_comment,'comments':comments, 'images': imgs}
+    context = {
+        'funding_detail': funding_detail,
+        'commentform': commentform,
+        'new_comment':new_comment,
+        'comments':comments, 
+        'images': imgs}
     return render(request, 'funding/funding_details.html', context)
 
 
@@ -82,13 +73,3 @@ def addfunding(request):
     pass
 
 
-# def addcomment(request):
-#     if request.method == 'POST':
-#         commentform = CommentForm(request.POST)
-#         if commentform.is_valid():
-#             commentform.save()
-#             return redirect(reverse('funding:home'))
-#         pass
-#     else:
-#         commentform = CommentForm()
-#     return render(request, 'funding/funding_details.html', {'commentform': commentform})
