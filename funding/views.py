@@ -114,3 +114,7 @@ def addfunding(request):
 #
 #     context = {'funding_list': page_obj, 'listlength': funding_list}
 #     return render(request, 'funding/filter_title.html', context)
+
+
+def contacts(request):
+    return render(request, 'funding/contacts.html', {})
