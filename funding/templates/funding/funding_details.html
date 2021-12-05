@@ -254,12 +254,12 @@
           </ul>
         </div>
 
-
+        {% if funding_detail.user.id == request.user.id %}
         <div class="share_wrap d-flex" style="flex-direction:column">
           <span class="mb-3">Cancel Fundunig:</span>
           <a href="{% url 'funding:confirm_cancel' funding_detail.id %}" class="btn btn-outline-danger">Cancel</a>
         </div>
-
+        {% endif %}
       </div>
     </div>
   </div>

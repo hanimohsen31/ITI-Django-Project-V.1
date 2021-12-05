@@ -15,7 +15,7 @@ class Category (models.Model):
 # fund ==> app
 # project ==> project
 class Funding(models.Model):
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE,related_name='funding')
     title = models.CharField(max_length=20)
     project_tags=TaggableManager()
     category = models.ForeignKey(Category,on_delete=models.DO_NOTHING)
@@ -33,8 +33,8 @@ class Funding(models.Model):
 
 # Donations
 class Project_donations(models.Model):
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    project = models.ForeignKey(Funding, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE,related_name='Project_donations')
+    project = models.ForeignKey(Funding, null=True, on_delete=models.CASCADE,related_name='Project_donations')
     donation = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -90,23 +90,3 @@ class Project_pics(models.Model):
 
     def __str__(self):
         return str(self.pic)
-
-
-# # Multiple Tags
-# class Tags(models.Model):
-#     name = models.CharField(max_length=50)
-
-#     def __str__(self):
-#         return self.name
-
-
-# class Project_tags(models.Model):
-#     project = models.ForeignKey('Funding', null=True, on_delete=models.CASCADE)
-#     tag = models.ForeignKey('Tags', null=True, on_delete=models.CASCADE)
-
-#     class Meta:
-#         verbose_name = "Project Tag"
-#         verbose_name_plural = "Project Tags"
-#         # project here to the project in same class
-#         unique_together = ('tag', 'project')
-

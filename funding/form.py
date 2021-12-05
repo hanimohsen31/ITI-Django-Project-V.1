@@ -11,8 +11,11 @@ from django import forms
 class FundingForm(forms.ModelForm):
     class Meta:
         model = Funding
-        fields = '__all__'
-        exclude = ['rating', 'user']
+        # fields = '__all__'
+        fields = ['title', 'project_tags', 'category', 'details', 'target', 'end', 'image']
+
+        exclude = ['rating']
+        # widgets = {'user': forms.HiddenInput()}
 
 
 class Report(forms.ModelForm):
