@@ -17,7 +17,8 @@ class Category (models.Model):
 class Funding(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE,related_name='funding')
     title = models.CharField(max_length=20)
-    project_tags=TaggableManager()
+    # tags
+    project_tags = TaggableManager()
     category = models.ForeignKey(Category,on_delete=models.DO_NOTHING)
     details = models.TextField(default='')
     target = models.IntegerField(default=0)

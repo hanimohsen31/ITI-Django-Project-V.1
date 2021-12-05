@@ -1,5 +1,7 @@
 from collections import UserDict
 from django.shortcuts import redirect, render
+
+from funding.models import Funding
 from .forms import Profileform, SignupForm, Userform 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -50,11 +52,10 @@ def signup(request):
     return render(request,'registration/signup.html',{'form':form})
 
 
-
-
 def profile(request):
     profile = Profile.objects.get(user=request.user)
-    return render(request,'accounts/profile.html',{'profile': profile})
+    projects = Funding.objects.filter(user=request.user)
+    return render(request,'accounts/profile.html',{'profile': profile,'projects':projects})
     # return render(request,'accounts/profile.html')
 
 

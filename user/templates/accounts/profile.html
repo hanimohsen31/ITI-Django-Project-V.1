@@ -33,7 +33,7 @@
     <div class="row">
 
         <div class="col-10" style="width: 50rem; float: left;margin-top: 2rem;">
-            <h2 style="text-align: center;">my Projects</h2>
+            <h2 style="text-align: center;">My Projects</h2>
             <table class="table table-dark table-striped">
                 <thead>
                 <tr>
@@ -44,13 +44,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for p in user.funding %}
+                {% for p in projects %}
                     <tr>
                         <td>title</td>
                         <td>category</td>
                         <td>
-                            {% for t in p.project_tags %}
-                                {{ t.name }} ,
+                            {% for t in p.project_tags.all %}
+                                {{ t }}
                             {% endfor %}
                         </td>
                         <td>
@@ -62,30 +62,12 @@
                 {% endfor %}
                 </tbody>
             </table>
+
             <div class="p-5">
                 <a class="boxed-btn3 w-100  warn" href="{% url 'accounts:profile_edit' %}"> Edit Profile</a>
                 <a style="margin-top: 1rem;" class="btn btn-danger w-100" href="{% url 'accounts:warn'%}">Delete my account</a>
             </div>
         </div>
-{#        <div style="width: 50rem; float: right;margin-top: 2rem;margin-right: 10rem;">#}
-{#            <h2 style="text-align: center;">my Donations</h2>#}
-{#            <table class="table table-dark table-striped">#}
-{#                <thead>#}
-{#                <tr>#}
-{#                    <th>Project</th>#}
-{#                    <th>Amount</th>#}
-{#                </tr>#}
-{#                </thead>#}
-{#                <tbody>#}
-{#                {% for d in user.funding %}#}
-{#                    <tr>#}
-{#                        <td>{{ d.title }}</td>#}
-{#                        <td>{{ d.donation }}</td>#}
-{#                    </tr>#}
-{#                {% endfor %}#}
-{#                </tbody>#}
-{#            </table>#}
-{#        </div>#}
     </div>
 
     <div style="clear: both;"></div>

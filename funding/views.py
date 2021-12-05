@@ -71,6 +71,7 @@ def funding_details(request, id):
             new_comment = commentform.save(commit=False)
             # Assign the current post to the comment
             new_comment.project = funding_detail
+            new_comment.user = request.user
             # Save the comment to the database
             new_comment.save()
             commentform = CommentForm()
