@@ -12,12 +12,15 @@ class FundingForm(forms.ModelForm):
     class Meta:
         model = Funding
         fields = '__all__'
+        exclude = ['rating', 'user']
 
 
 class Report(forms.ModelForm):
     class Meta:
         model = Reports
         fields = ('report',)
+
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Project_comments

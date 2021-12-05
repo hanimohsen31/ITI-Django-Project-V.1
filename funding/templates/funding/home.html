@@ -66,7 +66,7 @@
                                     <img src="{{i.image.url}}" alt="" width="82px" height="82px" >
                                 </div>
                                 <div class="jobs_conetent">
-                                    <a href="job_details.html"><h4>{{i.title}}</h4></a>
+                                    <a href="{% url 'funding:funding_details' i.id %}"><h4>{{i.title}}</h4></a>
                                     <div class="links_locat d-flex align-items-center">
                                         <div class="location">
                                             <p> <i class="fa fa-map-marker"></i>{{i.target}}</p>
