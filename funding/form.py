@@ -1,5 +1,5 @@
 from django import forms
-from .models import Funding, Project_pics, Reports, Project_donations,Project_comments
+from .models import Funding, Project_pics, Reports, Project_donations, Project_comments, InAppropriateProject
 # from django.forms import ModelForm
 import datetime
 from django import forms
@@ -20,8 +20,8 @@ class FundingForm(forms.ModelForm):
 
 class Report(forms.ModelForm):
     class Meta:
-        model = Reports
-        fields = ('report',)
+        model = InAppropriateProject
+        fields = ('body',)
 
 
 class CommentForm(forms.ModelForm):

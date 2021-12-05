@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models.query import QuerySet
-from django.shortcuts import render
-from .models import Funding, Project_comments, Project_donations, Project_pics
+from django.shortcuts import render, get_object_or_404
+from .models import Funding, Project_comments, Project_donations, Project_pics, InAppropriateProject
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.core.paginator import Paginator
@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from .form import FundingForm, CommentForm, DonateForm
+from .form import FundingForm, CommentForm, DonateForm , Report
 from taggit.models import Tag
 from .filters import FundingFilter
 from django.db.models import Sum
@@ -57,6 +57,7 @@ def funding_details(request, id):
             if check_target(funding_detail.id, donateform['donation'].data):
                 # Create Comment object but don't save to database yet          
                 new_donate = donateform.save(commit=False)
+                new_donate.user = request.user
                 # Assign the current post to the comment
                 new_donate.project = funding_detail
                 # Save the comment to the database
@@ -89,10 +90,10 @@ def funding_details(request, id):
         'donations': donations,
         'comments': comments,
         'message': message,
+        'reportform':Report,
         'images': imgs}
     return render(request, 'funding/funding_details.html', context)
 
-@login_required(login_url='login')
 def check_target(project_id, new_donation):
     do1 = Project_donations.objects.filter(project_id=project_id).aggregate(Sum('donation'))['donation__sum']
     if (do1):
@@ -100,7 +101,6 @@ def check_target(project_id, new_donation):
     else:
         do1 = 0
         donations = do1 + int(new_donation)
-
     funding_target = Funding.objects.get(id=project_id).target
     if funding_target >= donations:
         return True
@@ -140,3 +140,10 @@ def cancel_project(request, id ):
     Funding.objects.get(id=id,user=request.user).delete()
 
     return redirect(reverse('funding:home'))
+
+
+def report_project(request, project_id):
+    project = get_object_or_404(Funding, id=project_id)
+    in_appropriate_project = InAppropriateProject(user_id=request.user.id, project_id=project_id, body=request.POST['body'])
+    in_appropriate_project.save()
+    return redirect('funding:home')

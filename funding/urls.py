@@ -16,4 +16,5 @@ urlpatterns = [
 
     # path('<str:title>', views.filter_title, name='filter_title'),
     # path('<str:category>', views.filter_category, name='filter_category'),
+    path('<int:project_id>/reportProject', views.report_project, name="reportProject"),
 ]

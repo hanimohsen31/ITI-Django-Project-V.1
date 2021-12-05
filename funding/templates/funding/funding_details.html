@@ -118,41 +118,10 @@
               </p>
             </form>
             <div class="comment-conainer">
-              <!-- <h4>Comments</h4>
-              <input
-                type="text"
-                name="comment"
-                placeholder="Comment"
-                id="amount"
-                class="w-100"
-                style="
-                  border: 1px solid #7a838b38;
-                  color: #7a838b;
-                  font-size: 14px;
-                  font-weight: 400;
-                  padding: 10px;
-                  border-radius: 3px;
-                "
-              />
-              <a
-                class="btn btn-outline-success reporthim"
-                href="#"
-                style="margin: 10px auto"
-              >
-                Add Comment
-              </a> -->
 
-              <!-- {% if new_comment %}
-              <h2>Your comment has been added.</h2>
-              {% else %} -->
-
-              <!-- {% endif %} -->
               {% for comment in comments %}
               <div class="comment">
-                <!-- <p class="info">
-                  Comment {{ forloop.counter }} by {{ comment.name }}
-                  {{ comment.created }}
-                 </p> -->
+
                 {{ comment.comment|linebreaks }}
               </div>
               {% empty %}
@@ -168,15 +137,22 @@
                 font-weight: 400;
                 padding: 5px;
               ">
-              dddddddddd
             </p>
-            <a class="btn btn-outline-success reporthim" href="#" style="margin: 10px auto">Report</a>
+            <a class="btn btn-outline-success reporthim" href="{% url 'funding:reportProject' funding_detail.id %}" style="margin: 10px auto">
+              Report
+            </a>
+            <form action="" method="post">
+
+              {% csrf_token %}
+              {%bootstrap_form Report %}
+              <p>
+                <input type="submit" value="Report" class="btn btn-outline-success reporthim"
+                  style="margin: 10px auto" />
+              </p>
+            </form>
 
             <!-- End Comments Section -->
             <hr />
-            <!-- ######################################################################### -->
-            <!-- ######################################################################### -->
-            <!-- ######################################################################### -->
             <h4>Images</h4>
 
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -202,9 +178,7 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-            <!-- ######################################################################### -->
-            <!-- ######################################################################### -->
-            <!-- ######################################################################### -->
+
           </div>
         </div>
       </div>
@@ -222,8 +196,7 @@
               <li>Category: <span>{{funding_detail.category}}</span></li>
               <li>Target: <span>{{funding_detail.target}} LE</span></li>
               <li>Collected: <span>{{donations}} LE</span></li>
-              <!--                                <li>Location: <span>California, USA</span></li>-->
-              <!--                                <li>Job Nature: <span>{{funding_detail.job_type}}</span></li>-->
+
             </ul>
           </div>
         </div>

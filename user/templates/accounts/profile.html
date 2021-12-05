@@ -30,15 +30,24 @@
             {% endif %}
         </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
 
-        <div class="col-10" style="width: 50rem; float: left;margin-top: 2rem;">
+        <div class="col-9" style="width: 50rem; float: left;margin-top: 2rem;">
             <h2 style="text-align: center;">My Projects</h2>
+            <style>
+                table{
+                    text-align: center;
+                }
+
+                a{
+                    text-decoration: none;
+                    color: white;
+                }
+            </style>
             <table class="table table-dark table-striped">
                 <thead>
                 <tr>
-                    <th>title</th>
-                    <th>Donation</th>
+                    <th>Title</th>
                     <th>Category</th>
                     <th>Tages</th>
                 </tr>
@@ -46,17 +55,18 @@
                 <tbody>
                 {% for p in projects %}
                     <tr>
-                        <td>title</td>
-                        <td>category</td>
+
+                        <td><a href="{% url 'funding:funding_details' p.id %}" >{{p.title}}</a>
+
+                        </td>
+                        <td>{{p.category}}</td>
                         <td>
                             {% for t in p.project_tags.all %}
                                 {{ t }}
                             {% endfor %}
                         </td>
                         <td>
-                            {% for t in p.Project_donations %}
-                                <span style="">{{ t.donation }} </span>
-                            {% endfor %}
+
                         </td>
                     </tr>
                 {% endfor %}
