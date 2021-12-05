@@ -43,6 +43,7 @@ def home(request):
 
 
     funding_list = Funding.objects.all()
+
     myfilter = FundingFilter(request.GET, queryset=funding_list)
     funding_list = myfilter.qs
 
@@ -96,15 +97,26 @@ def funding_details(request, id):
         'message':message,
         'images': imgs}
     return render(request, 'funding/funding_details.html', context)
+
+
 def check_target(project_id,new_donation):
 
-    donations=Project_donations.objects.filter(project_id=project_id).aggregate(Sum('donation'))['donation__sum']+int(new_donation)   
+    do1=Project_donations.objects.filter(project_id=project_id).aggregate(Sum('donation'))['donation__sum']
+
+    if (do1):
+        donations = do1 +int(new_donation)
+    else:
+        do1 = 0
+        donations = do1 + int(new_donation)
+
     funding_target = Funding.objects.get(id=project_id).target
+
     print(donations)
     print(funding_target)
     if funding_target >= donations:
         return True
     return False
+
 
 def addfunding(request):
     if request.method == 'POST':
@@ -122,27 +134,22 @@ def addfunding(request):
     pass
 
 
-
-# def filter_title(request, title):
-#     funding_list = Funding.objects.filter(title=title)
-#     paginator = Paginator(funding_list, 5)
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-#
-#     context = {'funding_list': page_obj, 'listlength': funding_list}
-#     return render(request, 'funding/filter_title.html', context)
-#
-#
-# def filter_category(request, category):
-#     funding_list = Funding.objects.filter(category=category)
-#     paginator = Paginator(funding_list, 5)
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-#
-#     context = {'funding_list': page_obj, 'listlength': funding_list}
-#     return render(request, 'funding/filter_title.html', context)
-
-
 def contacts(request):
     return render(request, 'funding/contacts.html', {})
+
+
+def confirm_cancel(request, id):
+    donations = Project_donations.objects.filter(project_id=id).aggregate(Sum('donation'))['donation__sum']
+    if donations is None:
+        donations = 0
+    funding_target = Funding.objects.get(id=id).target
+    over25 = (donations / funding_target) * 100
+    return render(request, 'funding/confirm_cancel.html', {'id':id , 'over25': over25})
+
+
+def cancel_project(request, id):
+    Funding.objects.get(id=id).delete()
+    return redirect(reverse('funding:home'))
+
+
 

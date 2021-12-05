@@ -1,0 +1,33 @@
+{% extends './base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block body %}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="bradcam_text">
+          <h3>Be Careful</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ bradcam_area  -->
+
+{% if over25 < 25 %}
+    <div>
+        <h3>Confirm Cancelling Fund ....</h3>
+        <h2>Be Careful this can not be undone</h2>
+        <a href="{% url 'funding:cancel' id %}" class="btn btn-outline-danger">Cancel</a>
+    </div>
+{% else %}
+    <div>
+        <h2>You Can not Cancel This Fund </h2>
+        <a href="{% url 'funding:funding_details' id %}" class="btn btn-outline-danger">Redirect</a>
+    </div>
+{% endif %}
+{% endblock body %}
